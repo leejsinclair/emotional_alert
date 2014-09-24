@@ -76,7 +76,7 @@ function emotionalIndicator(str) {
 	);
 	*/
 
-	if( wordMatch && wordMatch.length>2 ) {
+	if( wordMatch && wordMatch.length>=2 ) {
 		emotionalAlert = true;
 	}
 
