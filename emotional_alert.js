@@ -215,15 +215,15 @@ function emotionalIndicator(str) {
 	var indicatorsMatch = str.match(indicatorsRe);
 
 	if(dangerMatch && dangerMatch.length>0) {
-		emotionalAlert = true;
+		emotionalAlert = 3;
 	}
 
 	if( wordMatch && wordMatch.length>=2 ) {
-		emotionalAlert = true;
+		emotionalAlert = emotionalAlert + 2;
 	}
 
 	if( indicatorsMatch && indicatorsMatch.length>4 ) {
-		emotionalAlert = true;
+		emotionalAlert = emotionalAlert + 1;
 	}
 
 	return emotionalAlert;
