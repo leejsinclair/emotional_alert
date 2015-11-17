@@ -9,14 +9,20 @@ var cases = [
 	{ 'text': 'I feel abnormal and confused', 'outcome': false },
 	{ 'text': 'I feel abnormal and confused because I have issues', 'outcome': false },
 	{ 'text': 'I feel abnormal and confused because I have issues with jokes', 'outcome': false },
-	{ 'text': 'I feel abnormal and confused because I have issues with jokes about my parents', 'outcome': 1 }
+	{ 'text': 'I feel abnormal and confused because I have issues with jokes about my parents', 'outcome': 1 },
+	{ 'text': 'Sometimes I feel a little low', 'outcome': false },
+	{ 'text': 'lowness', 'outcome': false },
+	{ 'text': 'Sometimes I feel a little low about death', 'outcome': true },
+	{ 'text': 'It left me fuming, but at the end of the day I took a deep breath.', 'outcome': false },
+	{ 'text': 'It left me fuming, but at the end of the day I took a deep breath. I was still a little mad', 'outcome': false }
 ];
 
 var result;
 
 cases.forEach(function(singleCase){
 	result = ea(singleCase.text);
-	if( result!==singleCase.outcome) {
+
+	if( result.emotional!==singleCase.outcome) {
 		console.error('fail', singleCase.text, result);
 	} else {
 		console.log('pass', singleCase.text);

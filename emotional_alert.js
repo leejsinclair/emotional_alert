@@ -180,6 +180,86 @@ var mediumWords = [
 	'not happy',
 	'unhappy'
 ];
+
+/*
+ANGER, ANGRY, EXPLODE, FRUSTRATED, MAD, FUMING, IRATE, OUT OF 
+
+CONTROL….. LEADS TO ANGER SESSION PROMPT
+
+HELPLESS, SAD, SADNESS, UPSET, LOW, LOST, UNHAPPY, FED UP, HURTING, 
+
+DEPRESSED, DEPRESSION, HOPELESS…… LEADS TO SADNESS SESSION 
+
+PROMPT
+
+STRESSED, FRUSTRATED, DISTRESSED, OVERWHELMED …… LEADS TO STRESS 
+
+SESSION
+
+ANXIETY, ANXIOUS, PANIC, PANICKY …. LEADS TO ANXIETY SESSION
+ */
+
+var stress = [
+	'stressed',
+	'frustrated',
+	'distressed',
+	'overwhelmed',
+	'agony',
+	'anxiety',
+	'burden',
+	'fear',
+	'hardship',
+	'hassle',
+	'strain',
+	'tension',
+	'trauma',
+	'worry',
+	'tense'
+];
+
+var sad = [
+	'agony',
+	'helpless',
+	'sad',
+	'sadness',
+	'upset',
+	'low',
+	'gloomy',
+	'grieve',
+	'grieved',
+	'grief',
+	'hurting',
+	'lost',
+	'unhappy',
+	'fed up',
+	'hurting',
+	'depressed',
+	'depression',
+	'hopeless',
+	'hopelessness',
+	'heartbroken',
+	'weep'
+];
+
+var anger = [
+	'anger',
+	'angry',
+	'explode',
+	'frustrated',
+	'mad',
+	'fuming',
+	'fury',
+	'violence',
+	'hatred',
+	'irritation',
+	'irate',
+	'outrage',
+	'rage',
+	'temper',
+	'out of control',
+	'blow up',
+	'trauma',
+];
 /**
  * Convert array of words into regular expression
  * @param  {String} listId    ID of words list
@@ -208,11 +288,32 @@ var dangerRe = convertWordsToRegExp(hardWords);
 var wordsRe = convertWordsToRegExp(mediumWords);
 var indicatorsRe = convertWordsToRegExp(softWords);
 
+var angerRe = convertWordsToRegExp(anger);
+var sadRe = convertWordsToRegExp(sad);
+var stressRe = convertWordsToRegExp(stress);
+
+function interSection( array1, array2 ) {
+	var intersection = array1.filter(function(n) {
+	    return array2.indexOf(n) != -1
+	});
+
+	return intersection;
+}
+
 function emotionalIndicator(str) {
+	str = str.toLowerCase();
+
 	var emotionalAlert = false;
 	var dangerMatch = str.match(dangerRe);
 	var wordMatch = str.match(wordsRe);
 	var indicatorsMatch = str.match(indicatorsRe);
+
+	var words =str.split(/\W+/);
+	var wordsLen = words?words.length:1;
+
+	var angerMatch = interSection(anger,words);
+	var sadMatch = interSection(sad,words);
+	var stressMatch = interSection(stress,words);
 
 	if(dangerMatch && dangerMatch.length>0) {
 		emotionalAlert = 3;
@@ -226,7 +327,14 @@ function emotionalIndicator(str) {
 		emotionalAlert = emotionalAlert + 1;
 	}
 
-	return emotionalAlert;
+	var response = {
+		'emotional': emotionalAlert,
+		'anger': ((angerMatch?angerMatch.length:0)/wordsLen),
+		'sad': ((sadMatch?sadMatch.length:0)/wordsLen),
+		'stress': ((stressMatch?stressMatch.length:0)/wordsLen)
+	};
+
+	return response;
 }
 
 if (module) {
