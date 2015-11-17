@@ -260,6 +260,15 @@ var anger = [
 	'blow up',
 	'trauma',
 ];
+
+var disease = [
+	'arthritis',
+	'cardiovascular disease',
+	'cancer',
+	'sleep apnea',
+	'dementia',
+	'diabetes'
+];
 /**
  * Convert array of words into regular expression
  * @param  {String} listId    ID of words list
@@ -288,13 +297,9 @@ var dangerRe = convertWordsToRegExp(hardWords);
 var wordsRe = convertWordsToRegExp(mediumWords);
 var indicatorsRe = convertWordsToRegExp(softWords);
 
-var angerRe = convertWordsToRegExp(anger);
-var sadRe = convertWordsToRegExp(sad);
-var stressRe = convertWordsToRegExp(stress);
-
 function interSection( array1, array2 ) {
 	var intersection = array1.filter(function(n) {
-	    return array2.indexOf(n) != -1
+	    return array2.indexOf(n) != -1;
 	});
 
 	return intersection;
@@ -314,6 +319,7 @@ function emotionalIndicator(str) {
 	var angerMatch = interSection(anger,words);
 	var sadMatch = interSection(sad,words);
 	var stressMatch = interSection(stress,words);
+	var diseaseMatch = interSection(disease,words);
 
 	if(dangerMatch && dangerMatch.length>0) {
 		emotionalAlert = 3;
@@ -337,13 +343,14 @@ function emotionalIndicator(str) {
 	var winnerVal = 0;
 	for(var key in response) {
 		if(response[key]!==0 && response[key]>winnerVal) {
-			winner = key,
+			winner = key;
 			winnerVal = response[key];
 		}
 	}
 
 	response.emotional = emotionalAlert;
 	response.winner = winner;
+	response.diseases = diseaseMatch;
 
 	return response;
 }

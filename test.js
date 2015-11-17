@@ -14,7 +14,8 @@ var cases = [
 	{ 'text': 'lowness', 'outcome': false },
 	{ 'text': 'Sometimes I feel a little low about death', 'outcome': true },
 	{ 'text': 'It left me fuming, but at the end of the day I took a deep breath.', 'outcome': false },
-	{ 'text': 'It left me fuming, but at the end of the day I took a deep breath. I was still a little mad', 'outcome': false }
+	{ 'text': 'It left me fuming, but at the end of the day I took a deep breath. I was still a little mad', 'outcome': false },
+	{ 'text': 'I\'ve just been diagnoses with Diabetes', 'outcome': false },
 ];
 
 var result;
