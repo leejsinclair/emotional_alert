@@ -181,24 +181,6 @@ var mediumWords = [
 	'unhappy'
 ];
 
-/*
-ANGER, ANGRY, EXPLODE, FRUSTRATED, MAD, FUMING, IRATE, OUT OF 
-
-CONTROL….. LEADS TO ANGER SESSION PROMPT
-
-HELPLESS, SAD, SADNESS, UPSET, LOW, LOST, UNHAPPY, FED UP, HURTING, 
-
-DEPRESSED, DEPRESSION, HOPELESS…… LEADS TO SADNESS SESSION 
-
-PROMPT
-
-STRESSED, FRUSTRATED, DISTRESSED, OVERWHELMED …… LEADS TO STRESS 
-
-SESSION
-
-ANXIETY, ANXIOUS, PANIC, PANICKY …. LEADS TO ANXIETY SESSION
- */
-
 var stress = [
 	'stressed',
 	'frustrated',
@@ -263,9 +245,9 @@ var anger = [
 
 var disease = [
 	'arthritis',
-	'cardiovascular disease',
+	'cardiovascular',
 	'cancer',
-	'sleep apnea',
+	'apnea',
 	'dementia',
 	'diabetes'
 ];
