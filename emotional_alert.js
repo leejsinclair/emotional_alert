@@ -328,11 +328,22 @@ function emotionalIndicator(str) {
 	}
 
 	var response = {
-		'emotional': emotionalAlert,
 		'anger': ((angerMatch?angerMatch.length:0)/wordsLen),
 		'sad': ((sadMatch?sadMatch.length:0)/wordsLen),
 		'stress': ((stressMatch?stressMatch.length:0)/wordsLen)
 	};
+
+	var winner = null;
+	var winnerVal = 0;
+	for(var key in response) {
+		if(response[key]!==0 && response[key]>winnerVal) {
+			winner = key,
+			winnerVal = response[key];
+		}
+	}
+
+	response.emotional = emotionalAlert;
+	response.winner = winner;
 
 	return response;
 }

@@ -25,6 +25,6 @@ cases.forEach(function(singleCase){
 	if( result.emotional!==singleCase.outcome) {
 		console.error('fail', singleCase.text, result);
 	} else {
-		console.log('pass', singleCase.text);
+		console.log('pass', singleCase.text, result);
 	}
 });
