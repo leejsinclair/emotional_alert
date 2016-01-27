@@ -1,6 +1,6 @@
 {
   "name": "emotional_alert",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Identify paragraphs written by emotionally vunerable people",
   "main": "emotional_alert.js",
   "scripts": {
