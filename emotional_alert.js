@@ -233,6 +233,13 @@ var anger = [
 	'fury',
 	'violence',
 	'hatred',
+	'hate',
+	'disgusting',
+	'shit',
+	'bloody',
+	'pissed',
+	'irritating',
+	'irritated',
 	'irritation',
 	'irate',
 	'outrage',
@@ -241,6 +248,7 @@ var anger = [
 	'out of control',
 	'blow up',
 	'trauma',
+	'traumatic'
 ];
 
 var disease = [
@@ -281,7 +289,7 @@ var indicatorsRe = convertWordsToRegExp(softWords);
 
 function interSection( array1, array2 ) {
 	var intersection = array1.filter(function(n) {
-	    return array2.indexOf(n) != -1;
+		return array2.indexOf(n) != -1;
 	});
 
 	return intersection;
@@ -290,10 +298,11 @@ function interSection( array1, array2 ) {
 function emotionalIndicator(str) {
 	str = str.toLowerCase();
 
+
 	var emotionalAlert = false;
-	var dangerMatch = str.match(dangerRe);
-	var wordMatch = str.match(wordsRe);
-	var indicatorsMatch = str.match(indicatorsRe);
+	var dangerMatch = str.match(dangerRe) || [];
+	var wordMatch = str.match(wordsRe) || [];
+	var indicatorsMatch = str.match(indicatorsRe) || [];
 
 	var words =str.split(/\W+/);
 	var wordsLen = words?words.length:1;
@@ -322,7 +331,8 @@ function emotionalIndicator(str) {
 		'triggerWords': {
 			'anger': angerMatch,
 			'sad': sadMatch,
-			'stress': stressMatch
+			'stress': stressMatch,
+			'alert': dangerMatch.concat(wordMatch).concat(indicatorsMatch)
 		}
 	};
 
