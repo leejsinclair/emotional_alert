@@ -318,7 +318,12 @@ function emotionalIndicator(str) {
 	var response = {
 		'anger': ((angerMatch?angerMatch.length:0)/wordsLen),
 		'sad': ((sadMatch?sadMatch.length:0)/wordsLen),
-		'stress': ((stressMatch?stressMatch.length:0)/wordsLen)
+		'stress': ((stressMatch?stressMatch.length:0)/wordsLen),
+		'triggerWords': {
+			'anger': angerMatch,
+			'sad': sadMatch,
+			'stress': stressMatch
+		}
 	};
 
 	var winner = null;
