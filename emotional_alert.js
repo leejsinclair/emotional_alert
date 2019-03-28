@@ -34,13 +34,18 @@ var hardWords = [
 	'hoplesness',
 	'helplessness',
 	'hoplessnes',
+	'homicide',
 	'kill',
+	'massacre',
 	'murder',
+	'murdered',
+	'murderer',
 	'mutilate',
 	'panic',
 	'sadness',
 	'self harm',
 	'scared',
+	'slaughterer',
 	'sorrow',
 	'stigma',
 	'stigmer',
@@ -50,7 +55,7 @@ var hardWords = [
 	'tragedy',
 	'tragic',
 	'victim',
-	'worthless'
+	'worthless',
 ];
 
 var softWords = [
@@ -270,7 +275,7 @@ function convertWordsToRegExp(wordsList) {
 		regExpression;
 	// Do not use preset
 	for (var i = 0; i < wordsList.length; i++) {
-		if (typeof(wordsList[i]) === 'string' && wordsList[i].length > 0) {
+		if (typeof (wordsList[i]) === 'string' && wordsList[i].length > 0) {
 			regStr += ((i !== 0) ? '|' : '') + wordsList[i];
 		}
 	}
@@ -287,8 +292,8 @@ var dangerRe = convertWordsToRegExp(hardWords);
 var wordsRe = convertWordsToRegExp(mediumWords);
 var indicatorsRe = convertWordsToRegExp(softWords);
 
-function interSection( array1, array2 ) {
-	var intersection = array1.filter(function(n) {
+function interSection(array1, array2) {
+	var intersection = array1.filter(function (n) {
 		return array2.indexOf(n) != -1;
 	});
 
@@ -304,30 +309,30 @@ function emotionalIndicator(str) {
 	var wordMatch = str.match(wordsRe) || [];
 	var indicatorsMatch = str.match(indicatorsRe) || [];
 
-	var words =str.split(/\W+/);
-	var wordsLen = words?words.length:1;
+	var words = str.split(/\W+/);
+	var wordsLen = words ? words.length : 1;
 
-	var angerMatch = interSection(anger,words);
-	var sadMatch = interSection(sad,words);
-	var stressMatch = interSection(stress,words);
-	var diseaseMatch = interSection(disease,words);
+	var angerMatch = interSection(anger, words);
+	var sadMatch = interSection(sad, words);
+	var stressMatch = interSection(stress, words);
+	var diseaseMatch = interSection(disease, words);
 
-	if(dangerMatch && dangerMatch.length>0) {
+	if (dangerMatch && dangerMatch.length > 0) {
 		emotionalAlert = 3;
 	}
 
-	if( wordMatch && wordMatch.length>=2 ) {
+	if (wordMatch && wordMatch.length >= 2) {
 		emotionalAlert = emotionalAlert + 2;
 	}
 
-	if( indicatorsMatch && indicatorsMatch.length>4 ) {
+	if (indicatorsMatch && indicatorsMatch.length > 4) {
 		emotionalAlert = emotionalAlert + 1;
 	}
 
 	var response = {
-		'anger': ((angerMatch?angerMatch.length:0)/wordsLen),
-		'sad': ((sadMatch?sadMatch.length:0)/wordsLen),
-		'stress': ((stressMatch?stressMatch.length:0)/wordsLen),
+		'anger': ((angerMatch ? angerMatch.length : 0) / wordsLen),
+		'sad': ((sadMatch ? sadMatch.length : 0) / wordsLen),
+		'stress': ((stressMatch ? stressMatch.length : 0) / wordsLen),
 		'triggerWords': {
 			'anger': angerMatch,
 			'sad': sadMatch,
@@ -338,8 +343,8 @@ function emotionalIndicator(str) {
 
 	var winner = null;
 	var winnerVal = 0;
-	for(var key in response) {
-		if(response[key]!==0 && response[key]>winnerVal) {
+	for (var key in response) {
+		if (response[key] !== 0 && response[key] > winnerVal) {
 			winner = key;
 			winnerVal = response[key];
 		}
