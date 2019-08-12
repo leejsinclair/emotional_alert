@@ -1,4 +1,4 @@
-var data = [
+[
 {"word":"abhor", "emotion": "anger"},
 {"word":"abhorr", "emotion": "anger"},
 {"word":"abhorr", "emotion": "disgust"},
@@ -1293,8 +1293,6 @@ var data = [
 {"word":"sickening", "emotion": "disgust"},
 {"word":"sickeningly", "emotion": "disgust"},
 {"word":"sickish", "emotion": "disgust"},
-{"word":"smile", "emotion": "joy"},
-{"word":"smiling", "emotion": "joy"},
 {"word":"smug", "emotion": "joy"},
 {"word":"smugness", "emotion": "joy"},
 {"word":"soft_spot", "emotion": "joy"},
@@ -1365,7 +1363,6 @@ var data = [
 {"word":"suspenseful", "emotion": "joy"},
 {"word":"suspensive", "emotion": "fear"},
 {"word":"suspensive", "emotion": "joy"},
-{"word": "sweet", "emotion": 'joy'},
 {"word":"sympathet", "emotion": "joy"},
 {"word":"sympathetic", "emotion": "joy"},
 {"word":"sympathetically", "emotion": "joy"},
@@ -1527,8 +1524,8 @@ var data = [
 {"word":"world-weari", "emotion": "sadness"},
 {"word":"world-weariness", "emotion": "sadness"},
 {"word":"world-weary", "emotion": "sadness"},
-{"word":"worri", "emotion": "sadness"},
-{"word":"worry", "emotion": "sadness"},
+{"word":"worri", "emotion": "joy"},
+{"word":"worry", "emotion": "joy"},
 {"word":"worship", "emotion": "joy"},
 {"word":"worshipful", "emotion": "joy"},
 {"word":"wrath", "emotion": "anger"},
@@ -1544,6 +1541,4 @@ var data = [
 {"word":"zealous", "emotion": "joy"},
 {"word":"zest", "emotion": "joy"},
 {"word":"zestfulness", "emotion": "joy"}
-];
-
-module.exports = data.map((d)=>{ return { word: d.word.replace(/\_/,' '), emotion: d.emotion }; });
+]
