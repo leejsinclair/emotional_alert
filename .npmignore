@@ -1,0 +1,6 @@
+data/bayes_classified_2.csv      
+data/bayes_classified.csv        
+data/emotion.csv                 
+data/emotion/text_emotion.csv    
+data/.~lock.bayes_classified.csv#
+data/bayes-training.js
