@@ -16,14 +16,15 @@ var cases = [
 	{ 'text': 'It left me fuming, but at the end of the day I took a deep breath.', 'outcome': false },
 	{ 'text': 'It left me fuming, but at the end of the day I took a deep breath. I was still a little mad', 'outcome': false },
 	{ 'text': 'I\'ve just been diagnoses with Diabetes', 'outcome': false },
+	{ 'text': 'I\'ve had a bad weekend', 'outcome': false },
 ];
 
 var result;
 
-cases.forEach(function(singleCase){
+cases.forEach(function (singleCase) {
 	result = ea(singleCase.text);
 
-	if( result.emotional!==singleCase.outcome) {
+	if (result.emotional !== singleCase.outcome) {
 		console.error('fail', singleCase.text, result);
 	} else {
 		console.log('pass', singleCase.text, result);

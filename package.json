@@ -20,5 +20,9 @@
   "bugs": {
     "url": "https://github.com/leejsinclair/emotional_alert/issues"
   },
-  "homepage": "https://github.com/leejsinclair/emotional_alert"
+  "homepage": "https://github.com/leejsinclair/emotional_alert",
+  "dependencies": {
+    "classificator": "^0.3.3",
+    "escape-string-regexp": "^1.0.5"
+  }
 }

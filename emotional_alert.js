@@ -1,4 +1,6 @@
 'use strict';
+const convertWordsToRegExp = require('./modules/converToRegEx');
+const emotion = require('./modules/emotion');
 var hardWords = [
 	'abuse',
 	'anguish',
@@ -270,23 +272,6 @@ var disease = [
  * @param  {Array} wordsList Array of words
  * @return {RegEx}           Regular expression used for matching
  */
-function convertWordsToRegExp(wordsList) {
-	var regStr = '',
-		regExpression;
-	// Do not use preset
-	for (var i = 0; i < wordsList.length; i++) {
-		if (typeof (wordsList[i]) === 'string' && wordsList[i].length > 0) {
-			regStr += ((i !== 0) ? '|' : '') + wordsList[i];
-		}
-	}
-
-	regStr = '\\b(' + regStr + ')\\b';
-
-
-	regExpression = new RegExp(regStr, 'gmi');
-
-	return regExpression;
-}
 
 var dangerRe = convertWordsToRegExp(hardWords);
 var wordsRe = convertWordsToRegExp(mediumWords);
@@ -329,6 +314,8 @@ function emotionalIndicator(str) {
 		emotionalAlert = emotionalAlert + 1;
 	}
 
+	const emotions = emotion(str);
+
 	var response = {
 		'anger': ((angerMatch ? angerMatch.length : 0) / wordsLen),
 		'sad': ((sadMatch ? sadMatch.length : 0) / wordsLen),
@@ -338,7 +325,8 @@ function emotionalIndicator(str) {
 			'sad': sadMatch,
 			'stress': stressMatch,
 			'alert': dangerMatch.concat(wordMatch).concat(indicatorsMatch)
-		}
+		},
+		...emotions,
 	};
 
 	var winner = null;
