@@ -17,6 +17,7 @@ var cases = [
 	{ 'text': 'It left me fuming, but at the end of the day I took a deep breath. I was still a little mad', 'outcome': false },
 	{ 'text': 'I\'ve just been diagnoses with Diabetes', 'outcome': false },
 	{ 'text': 'I\'ve had a bad weekend', 'outcome': false },
+	{ 'text': 'I felt anxious about todays meeting', outcome: false },
 ];
 
 var result;

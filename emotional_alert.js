@@ -320,6 +320,7 @@ function emotionalIndicator(str) {
 		'anger': ((angerMatch ? angerMatch.length : 0) / wordsLen),
 		'sad': ((sadMatch ? sadMatch.length : 0) / wordsLen),
 		'stress': ((stressMatch ? stressMatch.length : 0) / wordsLen),
+		'danger': ((dangerMatch ? dangerMatch.length : 0) / wordsLen),
 		'triggerWords': {
 			'anger': angerMatch,
 			'sad': sadMatch,
