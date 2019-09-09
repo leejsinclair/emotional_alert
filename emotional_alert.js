@@ -1,6 +1,7 @@
 'use strict';
 const convertWordsToRegExp = require('./modules/converToRegEx');
 const emotion = require('./modules/emotion');
+const simplify = require('simplify-language');
 var hardWords = [
 	'abuse',
 	'anguish',
@@ -10,11 +11,8 @@ var hardWords = [
 	'anxious',
 	'ancious',
 	'anxcious',
-	'can\'t cope',
 	'cruel',
 	'cut',
-	'end it all',
-	'end my life',
 	'death',
 	'depressed',
 	'depressed',
@@ -58,6 +56,12 @@ var hardWords = [
 	'tragic',
 	'victim',
 	'worthless',
+];
+
+var hardTerms = [
+	'can\'t cope',
+	'end it all',
+	'end my life',
 ];
 
 var softWords = [
@@ -168,24 +172,28 @@ var mediumWords = [
 	'unsettling',
 	'warning',
 	'worry',
-	'had enough',
-	'fed up',
 	'angry',
-	'out of control',
 	'sad',
 	'stressed',
-	'any sware words',
-	'give up',
-	'whats the point',
-	'can\'t change',
-	'too hard',
 	'stupid',
 	'idiot',
 	'tough',
 	'alone',
 	'lost',
-	'not happy',
 	'unhappy'
+];
+
+const mediumTerms = [
+	'not happy',
+	'give up',
+	'what\'s the point',
+	'whats the point',
+	'can\'t change',
+	'cant change',
+	'too hard',
+	'had enough',
+	'fed up',
+	'out of control',
 ];
 
 var stress = [
@@ -220,7 +228,6 @@ var sad = [
 	'hurting',
 	'lost',
 	'unhappy',
-	'fed up',
 	'hurting',
 	'depressed',
 	'depression',
@@ -228,6 +235,10 @@ var sad = [
 	'hopelessness',
 	'heartbroken',
 	'weep'
+];
+
+const sadTerms = [
+	'fed up',
 ];
 
 var anger = [
@@ -252,10 +263,12 @@ var anger = [
 	'outrage',
 	'rage',
 	'temper',
-	'out of control',
-	'blow up',
 	'trauma',
 	'traumatic'
+];
+const angerTerms = [
+	'out of control',
+	'blow up',
 ];
 
 var disease = [
@@ -273,9 +286,11 @@ var disease = [
  * @return {RegEx}           Regular expression used for matching
  */
 
-var dangerRe = convertWordsToRegExp(hardWords);
-var wordsRe = convertWordsToRegExp(mediumWords);
-var indicatorsRe = convertWordsToRegExp(softWords);
+const dangerRe = convertWordsToRegExp(hardWords);
+const dangerTermsRe = convertWordsToRegExp(hardTerms);
+const wordsRe = convertWordsToRegExp(mediumWords);
+const termsRs = convertWordsToRegExp(mediumTerms);
+const indicatorsRe = convertWordsToRegExp(softWords);
 
 function interSection(array1, array2) {
 	var intersection = array1.filter(function (n) {
@@ -287,20 +302,22 @@ function interSection(array1, array2) {
 
 function emotionalIndicator(str) {
 	str = str.toLowerCase();
+	const simpleString = simplify(str);
 
 
 	var emotionalAlert = false;
-	var dangerMatch = str.match(dangerRe) || [];
-	var wordMatch = str.match(wordsRe) || [];
-	var indicatorsMatch = str.match(indicatorsRe) || [];
+	var dangerMatch = (simpleString.match(dangerRe) || []).concat(str.match(dangerTermsRe)).filter((item) => { return item; });
+	var wordMatch = (simpleString.match(wordsRe) || []).concat(str.match(termsRs)).filter((item) => { return item; });
+	var indicatorsMatch = simpleString.match(indicatorsRe) || [];
 
+	var simpleWords = simpleString.split(/\W+/);
 	var words = str.split(/\W+/);
 	var wordsLen = words ? words.length : 1;
 
-	var angerMatch = interSection(anger, words);
-	var sadMatch = interSection(sad, words);
-	var stressMatch = interSection(stress, words);
-	var diseaseMatch = interSection(disease, words);
+	var angerMatch = interSection(anger, simpleWords).concat(interSection(angerTerms, words));
+	var sadMatch = interSection(sad, simpleWords).concat(interSection(sadTerms, words));
+	var stressMatch = interSection(stress, simpleWords);
+	var diseaseMatch = interSection(disease, simpleWords);
 
 	if (dangerMatch && dangerMatch.length > 0) {
 		emotionalAlert = 3;
@@ -314,7 +331,7 @@ function emotionalIndicator(str) {
 		emotionalAlert = emotionalAlert + 1;
 	}
 
-	const emotions = emotion(str);
+	const emotions = emotion(simpleString);
 
 	var response = {
 		'anger': ((angerMatch ? angerMatch.length : 0) / wordsLen),

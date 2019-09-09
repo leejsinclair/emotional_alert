@@ -1,6 +1,6 @@
 {
   "name": "emotional_alert",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "Identify paragraphs written by emotionally vunerable people",
   "main": "emotional_alert.js",
   "scripts": {
@@ -23,6 +23,7 @@
   "homepage": "https://github.com/leejsinclair/emotional_alert",
   "dependencies": {
     "classificator": "^0.3.3",
-    "escape-string-regexp": "^1.0.5"
+    "escape-string-regexp": "^1.0.5",
+    "simplify-language": "^1.0.1"
   }
 }

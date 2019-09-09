@@ -37,6 +37,14 @@ var cases = [
 	{ 'text': 'i don t like to feel uncomfortable with being alone and being quiet', outcome: 2, 'bayes': 'fear' },
 	{ 'text': 'i have to admit is the only time i feel a bit shaky', outcome: false, 'bayes': 'fear' },
 	{ 'text': 'i feel pressured by a dumb feeling', outcome: false, 'bayes': 'fear' },
+
+	{ 'text': 'im not happy', outcome: 2, 'bayes': 'sadness' },
+	{ 'text': 'im not sad', outcome: false, 'bayes': 'joy' },
+	{ 'text': 'im not scared', outcome: false, 'bayes': 'joy' },
+
+	{ 'text': 'i want to end it all', outcome: 3, 'bayes': 'sadness' },
+	{ 'text': 'abuse', outcome: 3, 'bayes': 'sadness' },
+	{ 'text': 'whats the point', outcome: false, 'bayes': 'sadness' },
 ];
 
 var result;

@@ -1,6 +1,7 @@
 const fs = require('fs');
 const words = require('../../data/emotion');
 const removeDoubleNeg = require('../double-neg');
+// const simplify = require('simplify-language');
 const convertWordsToRegExp = require('../converToRegEx');
 const bayes = require('classificator');
 
@@ -17,10 +18,6 @@ module.exports = (str) => {
     const total = emotions.reduce((acc, e) => { return acc + words.weighting[e] }, 0);
 
     const bayesResult = classifier.categorize(cleanStr);
-
-    // wordMatch.forEach((w) => {
-    //     console.log(w, words.lookup[w]);
-    // });
 
     var wordSplit = str.split(/\W+/);
     var wordsLen = wordSplit ? wordSplit.length : 1;
