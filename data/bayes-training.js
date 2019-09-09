@@ -2,7 +2,7 @@ const bayes = require('classificator');
 const classifier = bayes();
 const fs = require('fs');
 
-const inpath = `${__dirname}/bayes_classified_2.csv`;
+const inpath = `${__dirname}/bayes_classified_3.csv`;
 const outpath = `${__dirname}/bayes_classified.json`;
 const lines = fs.readFileSync(inpath, { encoding: 'utf8' }).split('\n');
 

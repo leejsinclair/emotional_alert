@@ -4,3 +4,4 @@ data/emotion.csv
 data/emotion/text_emotion.csv    
 data/.~lock.bayes_classified.csv#
 data/bayes-training.js
+data/watson

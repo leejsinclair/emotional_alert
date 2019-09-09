@@ -11,17 +11,16 @@ let classifier = bayes.fromJson(JSON.parse(bayesClassification));
 module.exports = (str) => {
     const cleanStr = removeDoubleNeg(str);
 
-    console.log(cleanStr);
     var wordMatch = cleanStr.match(wordsRe) || [];
 
     const emotions = wordMatch.map((w) => words.lookup[w]);
-    const total = emotions.reduce((acc, e) => { console.log(e); return acc + words.weighting[e] }, 0);
+    const total = emotions.reduce((acc, e) => { return acc + words.weighting[e] }, 0);
 
     const bayesResult = classifier.categorize(cleanStr);
 
-    wordMatch.forEach((w) => {
-        console.log(w, words.lookup[w]);
-    });
+    // wordMatch.forEach((w) => {
+    //     console.log(w, words.lookup[w]);
+    // });
 
     var wordSplit = str.split(/\W+/);
     var wordsLen = wordSplit ? wordSplit.length : 1;
