@@ -1,6 +1,8 @@
 'use strict';
 const convertWordsToRegExp = require('./modules/converToRegEx');
 const emotion = require('./modules/emotion');
+var emojiSentiment = require('emoji-extract-sentiment');
+
 const simplify = require('simplify-language');
 var hardWords = [
 	'abuse',
@@ -332,6 +334,7 @@ function emotionalIndicator(str) {
 	}
 
 	const emotions = emotion(simpleString);
+	const emoji = emojiSentiment(str);
 
 	var response = {
 		'anger': ((angerMatch ? angerMatch.length : 0) / wordsLen),
@@ -344,6 +347,7 @@ function emotionalIndicator(str) {
 			'stress': stressMatch,
 			'alert': dangerMatch.concat(wordMatch).concat(indicatorsMatch)
 		},
+		'emoji': emoji,
 		...emotions,
 	};
 

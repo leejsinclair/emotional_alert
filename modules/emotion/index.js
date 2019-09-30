@@ -25,5 +25,5 @@ module.exports = (str) => {
     const score = emotions.length > 0 ? (total / emotions.length) / wordsLen : 0;
     const category = bayesResult.likelihoods.filter((l) => l.category === bayesResult.predictedCategory)[0];
 
-    return { emotions, score, matches: wordMatch, bayes: { prediction: bayesResult.predictedCategory, proba: category.proba } };
+    return { emotions, score, matches: wordMatch, bayes: { prediction: bayesResult.predictedCategory, proba: category.proba, likelihoods: bayesResult.likelihoods } };
 };
